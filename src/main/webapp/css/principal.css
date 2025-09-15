@@ -1,0 +1,51 @@
+/* MENÚ LATERAL */
+.sidebar {
+    width: 220px;
+    height: 100vh; /* Ocupa toda la altura */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #343a40;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Divide el espacio entre la parte superior y la inferior */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* CONTENIDO DEL MENÚ */
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los enlaces a la izquierda */
+    gap: 15px; /* Añade espacio entre los enlaces */
+    flex-grow: 1; /* Asegura que ocupe el espacio disponible */
+}
+
+/* ENLACES DEL MENÚ */
+.sidebar .nav-link {
+    padding: 15px 20px;
+    color: white;
+    width: 100%; /* Los enlaces ocupan todo el ancho del menú */
+    text-align: left; /* Alinea el texto a la izquierda */
+    font-size: 16px; /* Ajusta el tamaño de fuente */
+    border-radius: 5px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #495057;
+}
+
+/* BOTÓN DE CERRAR SESIÓN */
+.sidebar .btn-danger {
+    margin-top: 20px;
+    width: 75%; /* El botón ocupa el 75% del ancho del lateral */
+    margin-left: auto; /* Lo centra en el menú lateral */
+    margin-right: auto;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+    margin-left: 240px; /* Deja espacio para el menú lateral */
+    padding: 40px;
+}

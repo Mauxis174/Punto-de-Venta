@@ -1,0 +1,149 @@
+CREATE DATABASE Punto_Venta;
+
+use Punto_Venta;
+
+CREATE TABLE tb_tipos
+
+(
+
+idtipo int not null primary key,
+
+descripcion varchar(45)
+
+);
+
+insert tb_tipos values (1,'ADMIN');
+
+insert tb_tipos values (2,'VENDEDOR');
+
+select * from tb_tipos;
+
+
+CREATE TABLE tb_usuarios
+
+(
+
+codigo int auto_increment,
+
+nombre varchar(15),
+
+apellido varchar(25), 
+
+usuario char(45) NOT NULL,
+
+clave char(10),
+
+facceso date null,
+
+tipo int DEFAULT 2,
+
+primary key (codigo),
+
+foreign key (tipo) references tb_tipos(idtipo)
+
+);
+
+select * from tb_usuarios;
+
+insert tb_usuarios values (null,'Juan','Perez','juanperez@gmail.com','contra1','20200105',2);
+
+insert tb_usuarios values (null,'Maria','Flores','mariaflores@hotmail.com','contra2','20180130',2);
+
+
+
+delimiter $
+
+create procedure usp_validaAcceso(usr char(45), pas char(10))
+
+begin
+
+select * from tb_usuarios where usuario = usr and clave = pas;
+
+end $
+
+call usp_validaAcceso('juanperez@gmail.com','contra1');
+call usp_validaAcceso('mariaflores@hotmail.com','contra2');
+
+
+
+CREATE TABLE cliente
+
+(
+id_cliente int auto_increment primary key,
+nombre varchar(60),
+apellido varchar(60),
+telefono int,
+dni varchar(8),
+contacto_dni VARCHAR(8),
+contacto_nombre VARCHAR(60)
+);
+
+select * from cliente;
+
+
+
+
+
+CREATE TABLE producto (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    codigo INT,
+    nombre VARCHAR(60),
+    precio DECIMAL(10,2),
+    stock INT
+);
+
+select * from producto;
+
+
+#esto es para eliminar
+ALTER TABLE producto ADD estado BOOLEAN DEFAULT TRUE;
+UPDATE producto SET estado = TRUE WHERE id_producto = 1;
+SELECT * FROM producto WHERE estado = TRUE;
+
+
+create procedure LISTAR_PRODUCTOS()
+SELECT id_producto, codigo, nombre, precio, stock from producto order by nombre asc;
+CALL LISTAR_PRODUCTOS();
+
+CREATE TABLE venta
+(
+id_venta int auto_increment primary key,
+fecha_venta DATETIME DEFAULT CURRENT_TIMESTAMP,
+total decimal(10,2)
+);
+select * from venta;
+
+CREATE TABLE detalleventa (
+    id_detalleventa INT AUTO_INCREMENT PRIMARY KEY,
+    cantidad INT NOT NULL,
+    precio DECIMAL(10,2),
+    subtotal DECIMAL(10,2),
+    id_venta INT,
+    id_producto INT,
+    FOREIGN KEY (id_venta) REFERENCES venta(id_venta),
+    FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+);
+select * from detalleventa;
+
+CREATE TABLE proveedor (
+    id_prov INT AUTO_INCREMENT PRIMARY KEY,
+    ruc VARCHAR(20),
+    NOMBRE VARCHAR(200),
+    TELEFONO VARCHAR(15),
+    DIRECCION VARCHAR(200),
+    RAZON VARCHAR(200),
+    fecha_venta DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+select * from proveedor;
+
+
+CREATE TABLE empresa (
+	id_emp INT AUTO_INCREMENT PRIMARY KEY,
+    ruc VARCHAR(20),
+    gerente varchar(200),
+    DIRECCION VARCHAR(200),
+    TELEFONO VARCHAR(15),
+    RAZON VARCHAR(200),
+    fecha_venta DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+select * from empresa;
