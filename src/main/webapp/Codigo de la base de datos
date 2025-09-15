@@ -147,3 +147,7 @@ CREATE TABLE empresa (
     fecha_venta DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 select * from empresa;
+
+#Probandoeditando
+#Probandoeditando
+#Probandoeditando
